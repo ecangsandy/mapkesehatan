@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataMaps;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('tes');
+    return view('maps');
 });
+Route::get('/getKecamatan', [DataMaps::class, 'getKecamatan']);
