@@ -145,8 +145,10 @@
         // $("#featureModal").modal("show");
         layer.on({
             mouseover: hightlightFeature,
-            mouseout: resetHightlight
+            mouseout: resetHightlight,
+            click: zoomToFeature
         });
+
         // var popupContent = "<p>I started out as a GeoJSON " +
         //     feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
 
@@ -179,7 +181,7 @@
     }
 
     mymap.on('click', function(e) {
-        alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+        // alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
     });
 
     function hightlightFeature(e) {
@@ -198,6 +200,10 @@
         }
 
         info.update(layer.feature.properties);
+    }
+
+    function zoomToFeature(e) {
+        mymap.fitBounds(e.target.getBounds());
     }
 
     function resetHightlight(e) {
@@ -245,7 +251,7 @@
     }
     L.geoJSON(jsondt, {
         onEachFeature: onEachFeature,
-        style: style
+        style: style,
     }).addTo(mymap);
     mymap.on('popupopen', function(e) {
 
